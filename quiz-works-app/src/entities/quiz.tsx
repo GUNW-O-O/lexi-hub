@@ -1,4 +1,5 @@
-// 퀴즈 엔티티의 타입을 정의합니다.
+// quiz-works-app/src/entities/quiz.ts
+
 export interface Quiz {
   id: string;
   title: string;
