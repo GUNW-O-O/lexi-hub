@@ -1,0 +1,27 @@
+.auth-form {
+  border: 2px solid var(--sub-color);
+  background-color: var(--card-color);
+  border-radius: 10px;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 100px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.form-group input {
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--main-color);
+  padding: 2px 2px;
+}
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
