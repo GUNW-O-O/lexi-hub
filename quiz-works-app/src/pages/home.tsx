@@ -1,11 +1,9 @@
 import React from 'react';
-import { QuizList } from 'widgets/quiz-list'; // QuizList 위젯을 불러오기
 
-export const HomePage = () => {
+export const HomePage: React.FC = () => {
   return (
-    <div>
-      <h1>타자 연습 사이트</h1>
-      <QuizList />
-    </div>
+    <>
+    123
+    </>
   );
 };
