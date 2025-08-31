@@ -11,14 +11,16 @@ export const AuthPage: React.FC = () => {
     setIsNonMember(prev => !prev)
   }
 
-  const login = async (data:{ id: string, password: string }) => {
-    try {
-      const res = await publicApi.post('/auth/login', data);
-      console.log(res.data)
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // const handleLogin = async (data:{ id: string, password: string }) => {
+  //   try {
+  //     const res = await publicApi.post('/auth/login', data);
+  //     const { access_token } = res.data;
+  //     localStorage.setItem('access_token', access_token);
+  //     console.log(res.data)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
   const signup = async (data:{ id: string, password: string }) => {
     try {
       const res = await publicApi.post('/auth/join', data);
@@ -32,6 +34,6 @@ export const AuthPage: React.FC = () => {
     isNonMember ? 
     <SignupForm reqSingUp={reqSingUp} signup={signup} />
      : 
-    <LoginForm reqSingUp={reqSingUp} login={login} />
+    <LoginForm reqSingUp={reqSingUp} />
   )
 }

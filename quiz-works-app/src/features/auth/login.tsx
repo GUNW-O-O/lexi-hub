@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import { Button } from 'shared/ui/button/button';
 import styles from './auth.module.css'
-
+import { publicApi } from 'shared/api/api'; // publicApi 임포트
+import { useAuth } from 'shared/lib/context/authProvider'; // useAuth 훅 임포트
 
 interface LoginFormProps {
   reqSingUp: () => void;
-  login: ({id, password}: {id: string, password: string}) => void;
+  // handleLogin: ({id, password}: {id: string, password: string}) => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp, login }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp }) => {
 
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { login } = useAuth(); // useAuth 훅 사용
+
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -21,9 +24,22 @@ export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp, login }) => {
     setPassword(e.target.value);
   }
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login({id, password});
+    try {
+      // 1. 로그인 요청
+      const res = await publicApi.post('/auth/login', { id, password });
+      const { access_token } = res.data;
+
+      // 2. Context API를 통해 인증 상태 전역 업데이트
+      login(access_token);
+      
+      // TODO: 로그인 성공 후 페이지 이동 로직 추가 (예: 홈 페이지)
+
+    } catch (error) {
+      console.error('로그인 실패:', error);
+      // 로그인 실패 시 사용자에게 피드백 제공
+    }
   }
 
   return (
