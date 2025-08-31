@@ -3,6 +3,7 @@ import { Button } from 'shared/ui/button/button';
 import styles from './auth.module.css'
 import { publicApi } from 'shared/api/api'; // publicApi 임포트
 import { useAuth } from 'shared/lib/context/authProvider'; // useAuth 훅 임포트
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   reqSingUp: () => void;
@@ -13,7 +14,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp }) => {
 
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { login } = useAuth(); // useAuth 훅 사용
+  const { login, user } = useAuth(); // useAuth 훅 사용
+
+  const navigate = useNavigate();
+
 
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +37,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp }) => {
 
       // 2. Context API를 통해 인증 상태 전역 업데이트
       login(access_token);
-      
+      console.log('로그인 성공',user)
       // TODO: 로그인 성공 후 페이지 이동 로직 추가 (예: 홈 페이지)
+      navigate('/');
 
     } catch (error) {
       console.error('로그인 실패:', error);
