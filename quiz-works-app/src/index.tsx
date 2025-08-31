@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { App } from 'app/ui/App';
 import { HomePage } from './pages/home'; // HomePage 컴포넌트 불러오기
-import { QuizPage } from 'pages/quiz';
 import { AuthPage } from 'pages/login';
+import { NoteNewPage } from 'pages/noteNewPage';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +20,8 @@ const router = createBrowserRouter([
         element: <AuthPage />,
       },
       {
-        path: 'quiz/:quizId',
-        element: <QuizPage />,
+        path: 'note/new',
+        element: <NoteNewPage />,
       },
     ],
   },

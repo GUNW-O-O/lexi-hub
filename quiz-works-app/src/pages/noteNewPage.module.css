@@ -1,0 +1,45 @@
+.note-new-page {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  margin-top: 100px;
+  justify-content: center;
+  gap: 20px;
+}
+.new-note {
+  padding: 20px 50px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  border: 1px solid var(--sub-color);
+  border-radius: 10px;
+  background-color: var(--card-color);
+}
+.new-note>input {
+  padding: 3px 10px;
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: transparent;
+  color: var(--main-color);
+}
+.type-selector {
+  display: flex;
+  gap: 10px;
+}
+.type-selector .type-input {
+  display: none;
+}
+.type-label.active {
+  background-color: var(--sub-color);
+  color: black;
+}
+.word-list {
+  padding: 20px 50px;
+  min-width: 300px;
+  min-height: 300px;
+  background-color: var(--card-color);
+  border: 1px solid var(--sub-color);
+  border-radius: 10px;
+}

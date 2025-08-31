@@ -5,7 +5,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 10px;
-  background-color: var(--card-color);
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--sub-color);
 }
 .header .util {
   display: flex;
