@@ -1,7 +1,6 @@
 // src/shared/ui/button/index.tsx
 import React from 'react';
 import { Link, To } from 'react-router-dom';
-import styles from './button.module.css';
 
 interface ButtonProps {
   to: To; // react-router-dom의 Link 컴포넌트 경로 타입

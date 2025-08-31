@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { App } from 'app/ui/App';
 import { HomePage } from './pages/home'; // HomePage 컴포넌트 불러오기
 import { QuizPage } from 'pages/quiz';
-import { LoginPage } from 'pages/login';
+import { AuthPage } from 'pages/login';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <LoginPage />,
+        element: <AuthPage />,
       },
       {
         path: 'quiz/:quizId',
