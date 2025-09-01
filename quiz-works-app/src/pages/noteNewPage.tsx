@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'shared/lib/context/authProvider';
 import s from './noteNewPage.module.css';
 import { FlashcardForm } from 'features/note/flashcardForm';
-import { FlashcardItem } from 'shared/types/note';
+import { FlashcardItem } from 'entities/flashcard/note';
 // import { LongformForm } from 'features/note/longform-form'; // 아직 만들지 않은 컴포넌트
 
 
