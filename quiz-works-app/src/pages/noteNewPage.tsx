@@ -6,6 +6,7 @@ import { useAuth } from 'shared/lib/context/authProvider';
 import s from './noteNewPage.module.css';
 import { FlashcardForm } from 'features/note/flashcardForm';
 import { FlashcardItem } from 'entities/flashcard/note';
+import { privateApi } from 'shared/api/api';
 // import { LongformForm } from 'features/note/longform-form'; // 아직 만들지 않은 컴포넌트
 
 
@@ -29,6 +30,29 @@ export const NoteNewPage = () => {
   const addFlashcard = (word: FlashcardItem) => {
     setFlashcards([...flashcards, word]);
   };
+
+  const deleteFlashcard = (idx: number) => {
+    // 인덱스가 idx와 같지 않은 요소들만 남겨서 새로운 배열을 만듭니다.
+    const newFlashcards = flashcards.filter((_, index) => index !== idx);
+    setFlashcards(newFlashcards);
+  }
+
+  const completeFlashcard = async () => {
+    const data = {
+      title : noteName,
+      type: 'flashcard',
+      flashcards: flashcards,
+    };
+    try {
+      const res = await privateApi.post('/notes', data);
+      alert('저장 성공')
+      console.log(res)
+      navigate('/');
+    } catch (error) {
+      alert('노트 저장에 실패했습니다.');
+      console.error(error);
+    }
+  }
 
 
   return (
@@ -63,7 +87,7 @@ export const NoteNewPage = () => {
 
         {/* 선택된 타입에 따라 다른 폼 컴포넌트 렌더링 */}
         {noteType === 'flashcard' ? (
-          <FlashcardForm addFlashcard={addFlashcard} />
+          <FlashcardForm addFlashcard={addFlashcard} completeFlashcard={completeFlashcard} />
         ) : (
           <>
           </>
@@ -73,9 +97,29 @@ export const NoteNewPage = () => {
       {noteType === 'flashcard' && (
         <>
           <div className={s.wordList}>
-            <p>123</p>
-            <p>123</p>
-            <p>123</p>
+            <div className={s.wordHeader}>
+              <div className={s.word}>
+                <p>단어</p>
+              </div>
+              <div className={s.meaning}>
+                <p>뜻</p>
+              </div>
+            </div>
+            {flashcards.map((card, idx) => {
+              return (
+                <>
+                  <div key={idx} className={s.wordItem}>
+                    <div className={s.word}>
+                      <p>{card.word}</p>
+                    </div>
+                    <div className={s.meaning}>
+                      <p>{card.meaning}</p>
+                    </div>
+                    <button className='btn' onClick={() => deleteFlashcard(idx)}>삭제</button>
+                  </div>
+                </>
+              )
+            })}
           </div>
         </>
       )}

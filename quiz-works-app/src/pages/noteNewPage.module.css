@@ -7,7 +7,7 @@
   gap: 20px;
 }
 .new-note {
-  padding: 20px 50px;
+  padding: 20px 20px;
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -36,10 +36,49 @@
   color: black;
 }
 .word-list {
-  padding: 20px 50px;
-  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 20px;
+  min-width: 363px;
+  max-width: 500px;
   min-height: 300px;
   background-color: var(--card-color);
   border: 1px solid var(--sub-color);
   border-radius: 10px;
+}
+.word-list .word-header {
+  display: flex;
+  border-bottom: 1px solid var(--sub-color);
+  padding-bottom: 3px;
+}
+.word-list .word-header .word {
+  text-align: center;
+  width: 90px;
+}
+.word-list .word-header .meaning {
+  text-align: center;
+  width: 180px;
+}
+.word-list .word-item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.word-list .word-item .word {
+  width: 90px;
+  margin-right: 3px;
+}
+.word-list .word-item .meaning {
+  width: 180px;
+}
+.word-list .word-item .word p,
+.word-list .word-item .meaning p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.word-list .word-item .word p {
+  border-right: 1px solid var(--sub-color);
 }

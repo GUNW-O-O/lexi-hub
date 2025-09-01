@@ -17,3 +17,8 @@
   color: var(--main-color);
   width: 100%;
 }
+.flash-card-form .btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
