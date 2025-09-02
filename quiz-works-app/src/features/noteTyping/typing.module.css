@@ -1,3 +1,53 @@
 .typing {
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-color);
+    margin-top: 150px;
+}
+
+.typing h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.typingText {
+    font-size: 1.5rem;
+    white-space: pre-wrap;
+    position: relative;
+    /* 텍스트 줄바꿈을 방지하여 커서 위치 계산 오류를 막음 */
+    white-space: nowrap; 
+}
+
+/* 숨겨진 인풋 필드 */
+.typingInput {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+    z-index: -1;
+}
+.typingText span {
+    /* 각 글자에 대한 기본 스타일. 글자 사이의 간격 조정 가능 */
+    display: inline-block; /* 각 글자가 독립적인 요소로 간주되도록 */
+}
+
+/* 커서 깜빡임 애니메이션 */
+.cursor {
+    position: absolute;
+    top: 0;
+    width: 0;
+    border-right: 2px solid white;
+    animation: blink 1s step-end infinite;
+    opacity: 0; /* 커서가 처음부터 보이지 않게 */
+}
+
+/* 커서 깜빡임 애니메이션 */
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: white; }
 }
