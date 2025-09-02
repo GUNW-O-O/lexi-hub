@@ -5,6 +5,7 @@ import { App } from 'app/ui/App';
 import { HomePage } from './pages/home'; // HomePage 컴포넌트 불러오기
 import { AuthPage } from 'pages/login';
 import { NoteNewPage } from 'pages/noteNewPage';
+import { NoteTyping } from 'pages/noteTyping';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: 'note/new',
         element: <NoteNewPage />,
+      },
+      {
+        path: 'notes/:id',
+        element: <NoteTyping/>
       },
     ],
   },
