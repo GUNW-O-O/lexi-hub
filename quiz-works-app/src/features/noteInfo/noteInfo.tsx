@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'shared/ui/button/button'
 import { privateApi } from 'shared/api/api';
-import { FlashcardItem } from 'entities/flashcard/note';
+import { MongoFlashcard } from 'entities/flashcard/note';
 import { useParams } from 'react-router-dom';
 
-export const NoteInfo = () => {
+export const FlashCardInfo: React.FC = () => {
 
   const { id } = useParams<{ id: string }>();
-  const [note, setNote] = useState<FlashcardItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [note, setNote] = useState<MongoFlashcard | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!id) {
@@ -19,8 +19,7 @@ export const NoteInfo = () => {
       try {
         setLoading(true);
         const res = await privateApi.get(`/notes/typing/${id}`);
-        const shufflednote = res.data.flashnote.sort(() => Math.random() - 0.5);
-        setNote(shufflednote);
+        setNote(res.data)
       } catch (error) {
         alert('초기 로딩 실패');
         console.log(error);
@@ -31,10 +30,14 @@ export const NoteInfo = () => {
     getNoteById();
   }, [id]);
 
+  if(loading) {
+    <div>로딩중임다</div>
+  }
+
   return (
     <>
       <p>해당 단어집의 정보입니다</p>
-      {/* <Button children={'타이핑하기'} to={`/notes/typing/${note._id}`} /> */}
+      <Button children={'타이핑하기'} to={`/notes/typing/${note?._id}`} />
     </>
   )
 }

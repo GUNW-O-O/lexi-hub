@@ -46,7 +46,7 @@ export const NoteList: React.FC = () => {
           </div>
           <div className={s.notes}>
             {notes.map((note:MongoFlashcard) => 
-              <Link to={`/notes/${note._id}`}>
+              <Link to={`/notes/info/${note._id}`}>
                 <p>{(note.type === 'flashcard' ? '📃' : '📗')}{note.author} / {note.title}</p>
               </Link>
             )}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import s from './typing.module.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { privateApi } from 'shared/api/api';
 import { FlashcardItem } from 'entities/flashcard/note';
 
@@ -13,6 +13,8 @@ export const FlashcardTyping: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
+
+  const navigate = useNavigate();
 
   const currentCard = cards[currentIndex];
 
@@ -80,6 +82,7 @@ export const FlashcardTyping: React.FC = () => {
         } else {
           // TODO : 해당 단어집의 디테일페이지로 이동
           alert('모든 단어를 완료했습니다!');
+          navigate(`/notes/info/${id}`);
         }
       } else {
         setInputValue('');
