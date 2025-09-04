@@ -1,21 +1,13 @@
-import React, { useState } from 'react'
-import { Button } from 'shared/ui/button/button'
 import { MongoFlashcard } from 'entities/flashcard/note';
-import s from './flashcardInfo.module.css'
+import React from 'react';
+import { Button } from 'shared/ui/button/button';
+import s from './flashcardInfo.module.css';
 
 interface FlashcardInfoProps {
-  flashcard: MongoFlashcard;
+  note: MongoFlashcard;
 }
 
-export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({flashcard}) => {
-
-  const [note, setNote] = useState<MongoFlashcard>(flashcard);
-  const [loading, setLoading] = useState<boolean>(true);
-
-
-  if (loading) {
-    <div>로딩중임다</div>
-  }
+export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({note}) => {
 
   return (
     <div className={s.cardInfo}>

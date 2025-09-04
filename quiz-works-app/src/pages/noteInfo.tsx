@@ -36,7 +36,7 @@ export const NoteInfo: React.FC = () => {
 
   return (
     <>
-      <FlashCardInfo flashcard={note} />
+      <FlashCardInfo note={note} />
     </>
   )
 }
