@@ -47,7 +47,7 @@ export const FlashCardInfo: React.FC = () => {
             <p>브랜치</p>
             <p>머</p>
             <p>다른</p>
-            <p>기능</p>
+            <Button children={'수정'} to={`/notes/edit/${note?._id}`} />
             <Button children={'타이핑하기'} to={`/notes/typing/${note?._id}`} />
           </div>
           <div className={s.wordInfo}>
@@ -64,7 +64,7 @@ export const FlashCardInfo: React.FC = () => {
           </div>
         </div>
         <div className={s.rightContainer}>
-          사이드바
+          사이드바 구현할기능 생각하기
         </div>
       </div>
     </div>
