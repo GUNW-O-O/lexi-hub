@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext, useEffect, PropsWithChildren } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { privateApi } from 'shared/api/api';
+import {setCookie, getCookie, deleteCookie} from 'shared/lib/cookie/cookieUtil'
 
 // JWT 페이로드 타입을 정의합니다.
 interface JwtPayload {
