@@ -1,7 +1,6 @@
 // src/shared/lib/context/auth-provider.tsx
 import React, { createContext, useState, useContext, useEffect, PropsWithChildren } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { privateApi } from 'shared/api/api';
 import {setCookie, getCookie, deleteCookie} from 'shared/lib/cookie/cookieUtil'
 
 // JWT 페이로드 타입을 정의합니다.
@@ -22,7 +21,8 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const login = (token: string) => {
     // 토큰을 로컬 스토리지에 저장 (나중에 복구 가능)
-    localStorage.setItem('accessToken', token);
+    // localStorage.setItem('accessToken', token);
+    setCookie('accessToken', token, 60);
 
     const decodedToken = jwtDecode<JwtPayload>(token);
     const userId = decodedToken.sub;
@@ -33,13 +33,15 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('accessToken');
+    // localStorage.removeItem('accessToken');
+    deleteCookie('accessToken');
     setUser(null);
   };
 
   // 컴포넌트 마운트 시 로컬 스토리지에서 토큰 복구
   useEffect(() => {
-    const token = localStorage.getItem('accessToken');
+    // const token = localStorage.getItem('accessToken');
+    const token = getCookie('accessToken');
     if (token) {
       const verifyToken = async () => {
         try {

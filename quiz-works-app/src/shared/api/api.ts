@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "shared/lib/cookie/cookieUtil";
 
 export const publicApi = axios.create({
   baseURL: '/api',
@@ -12,7 +13,7 @@ export const privateApi = axios.create({
 // 요청 인터셉터를 사용하여 토큰을 동적으로 추가
 privateApi.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('accessToken'); // 또는 쿠키 등에서 가져옴
+    const token = getCookie('accessToken'); // 또는 쿠키 등에서 가져옴
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

@@ -15,6 +15,9 @@ export const NoteList: React.FC = () => {
   const getNoteList = async () => {
     try {
       setLoading(true);
+      if (!user) {
+        return
+      }
       const res = await privateApi.get('/notes');
       console.log(res)
       setNotes(res.data);
@@ -29,13 +32,17 @@ export const NoteList: React.FC = () => {
   }, [])
 
 
-  if(loading) {
-    return <div>로딩..</div>
+  if (loading) {
+    return (
+      <div className={s.noteList}>
+        <p>로그인을 해주세요</p>
+      </div>
+    )
   }
 
   return (
     <div className={s.noteList}>
-      {user ? (
+      {user && (
         <>
           <div className={s.sideUtil}>
             <div className={s.nameAndNew}>
@@ -45,15 +52,13 @@ export const NoteList: React.FC = () => {
             <input type="text" placeholder="검색어를 입력하세요" />
           </div>
           <div className={s.notes}>
-            {notes.map((note:MongoFlashcard) => 
+            {notes.map((note: MongoFlashcard) =>
               <Link to={`/notes/info/${note._id}`}>
                 <p>{(note.type === 'flashcard' ? '📃' : '📗')}{note.author} / {note.title}</p>
               </Link>
             )}
           </div>
         </>
-      ) : (
-        <p>로그인을 해주세요</p>
       )}
     </div>
   )
