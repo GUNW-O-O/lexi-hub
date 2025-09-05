@@ -12,7 +12,7 @@ export const NoteTyping: React.FC = () => {
   const getNoteById = async () => {
     try {
       setLoading(true);
-      const res = await privateApi.get(`/notes/typing/${id}`);
+      const res = await privateApi.get(`/notes/${id}`);
       if (res.data.type === 'flashcard') {
         setFlashcard(res.data);
       }

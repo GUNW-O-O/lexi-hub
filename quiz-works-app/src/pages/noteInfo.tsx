@@ -18,7 +18,7 @@ export const NoteInfo: React.FC = () => {
     const getNoteById = async () => {
       try {
         setLoading(true);
-        const res = await privateApi.get(`/notes/typing/${id}`);
+        const res = await privateApi.get(`/notes/${id}`);
         setNote(res.data)
       } catch (error) {
         alert('초기 로딩 실패');

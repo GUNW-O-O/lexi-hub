@@ -37,6 +37,7 @@ export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({note}) => {
               </div>
             )}
           </div>
+          <Unimplemented title='미구현 기능'/>
         </div>
         <div className={s.rightContainer}>
           <Unimplemented title='미구현 기능'/>
