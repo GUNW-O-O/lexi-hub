@@ -4,6 +4,7 @@ import { privateApi } from 'shared/api/api';
 import { MongoFlashcard } from 'entities/flashcard/note';
 import { useParams } from 'react-router-dom';
 import s from './flashcardInfo.module.css'
+import Unimplemented from 'shared/lib/skeleton/Unimplemented';
 
 export const FlashCardInfo: React.FC = () => {
 
@@ -55,7 +56,7 @@ export const FlashCardInfo: React.FC = () => {
               <p className='subtitle'>단어</p>
               <p className='subtitle'>뜻</p>
             </div>
-            {note?.flashcards?.map((card) => 
+            {note?.flashcards?.map((card) =>
               <div className={s.row} key={card._id}>
                 <p className={s.word}>{card.word}</p>
                 <p className={s.meaning}>{card.meaning}</p>
@@ -64,7 +65,7 @@ export const FlashCardInfo: React.FC = () => {
           </div>
         </div>
         <div className={s.rightContainer}>
-          사이드바
+          <Unimplemented title='미구현 기능'/>
         </div>
       </div>
     </div>

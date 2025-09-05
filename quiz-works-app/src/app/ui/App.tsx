@@ -3,6 +3,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom';
 import { AuthProvider } from 'shared/lib/context/authProvider';
 import { Header } from 'widgets/header/header';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const App: React.FC = () => {
   return (
