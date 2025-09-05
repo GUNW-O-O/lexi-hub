@@ -22,7 +22,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const login = (token: string) => {
     // 토큰을 로컬 스토리지에 저장 (나중에 복구 가능)
     // localStorage.setItem('accessToken', token);
-    setCookie('accessToken', token, 60);
+    setCookie('accessToken', token, 30);
 
     const decodedToken = jwtDecode<JwtPayload>(token);
     const userId = decodedToken.sub;
@@ -35,6 +35,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const logout = () => {
     // localStorage.removeItem('accessToken');
     deleteCookie('accessToken');
+    deleteCookie('refreshToken');
     setUser(null);
   };
 

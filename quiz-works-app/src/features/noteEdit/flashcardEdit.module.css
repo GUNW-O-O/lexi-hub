@@ -4,10 +4,6 @@
   padding: 10px;
   gap: 20px;
 }
-.add-card {
-  margin-top: 100px;
-  display: flex;
-}
 .card-edit {
   background-color: var(--card-color);
   display: flex;
@@ -17,6 +13,11 @@
   border-radius: 10px;
   padding: 10px;
   border: 1px solid var(--sub-color);
+  align-items: start;
+}
+.btn-container {
+  display: flex;
+  gap: 10px;
 }
 .card {
   display: flex;
@@ -62,4 +63,42 @@
   outline: none;
   border-radius: 5px;
   color: black;
+}
+.add-card-container {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--card-color);
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid var(--sub-color);
+  min-width: 300px;
+  align-items: start;
+  justify-content: center;
+}
+.add-card-container>input {
+  width: 100%;
+  font-size: 20px;
+  background-color: transparent;
+  border: 1px solid var(--sub-color);
+  outline: none;
+  border-radius: 5px;
+  padding: 5px;
+  color: var(--main-color);
+}
+.add-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.add-card input {
+  font-size: 16px;
+  background-color: transparent;
+  border: 1px solid var(--sub-color);
+  outline: none;
+  border-radius: 5px;
+  padding: 5px;
+  color: var(--main-color);
 }

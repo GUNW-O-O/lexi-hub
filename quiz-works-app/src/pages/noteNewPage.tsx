@@ -7,6 +7,7 @@ import s from './noteNewPage.module.css';
 import { FlashcardForm } from 'features/noteCreate/flashcardForm';
 import { FlashcardItem } from 'entities/flashcard/note';
 import { privateApi } from 'shared/api/api';
+import { Button } from 'shared/ui/button/button';
 // import { LongformForm } from 'features/note/longform-form'; // 아직 만들지 않은 컴포넌트
 
 
@@ -58,6 +59,7 @@ export const NoteNewPage = () => {
   return (
     <div className={s.noteNewPage}>
       <div className={s.newNote}>
+      <Button children={'취소'} to={'/'} />
         <input type="text" value={noteName} onChange={(e) => setNoteName(e.target.value)} placeholder="제목을 입력하세요" />
         <div className={s.typeSelector}>
           <label htmlFor='flashcard-type' className={`btn ${s.typeLabel} ${noteType === 'flashcard' ? s.active : ''}`}>

@@ -4,17 +4,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { privateApi } from 'shared/api/api';
 import { MongoFlashcard, FlashcardItem } from 'entities/flashcard/note';
 import { useAuth } from 'shared/lib/context/authProvider';
+import { Button } from 'shared/ui/button/button';
 
 export const FlashcardEdit: React.FC = () => {
 
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user,logout } = useAuth();
   const navigate = useNavigate();
 
   const [mongoCard, setMongoCard] = useState<MongoFlashcard>(null!);
   const [flashcards, setFlashcards] = useState<FlashcardItem[]>(null!);
   const [loading, setLoading] = useState(true);
   const [editNo, setEditNo] = useState<number>(-1);
+  const [editTitle, setEditTitle] = useState('');
   const [editWord, setEditWord] = useState('');
   const [editMeaning, setEditMeaning] = useState('');
   const [addWord, setAddWord] = useState('');
@@ -24,6 +26,7 @@ export const FlashcardEdit: React.FC = () => {
   useEffect(() => {
     if (!user) {
       alert('로그인을 해주세요');
+      logout();
       navigate('/');
     }
     const getNoteById = async () => {
@@ -32,6 +35,7 @@ export const FlashcardEdit: React.FC = () => {
         const res = await privateApi.get(`/notes/${id}`);
         setMongoCard(res.data);
         setFlashcards(res.data.flashcards);
+        setEditTitle(res.data.title);
         console.log(res.data)
       } catch (error) {
         alert('초기 로딩 실패');
@@ -42,7 +46,7 @@ export const FlashcardEdit: React.FC = () => {
     };
     getNoteById();
   }, [id])
-  
+
   const openEditWord = (index: number) => {
     if (editNo === index) {
       setEditNo(-1);
@@ -54,7 +58,9 @@ export const FlashcardEdit: React.FC = () => {
   }
 
   const tempSaveWord = () => {
-
+    setFlashcards(prev => [...prev, { word: addWord, meaning: addMeaning }]);
+    setAddWord('');
+    setAddMeaning('');
   }
 
   const tempDeleteWord = (index: number) => {
@@ -77,7 +83,7 @@ export const FlashcardEdit: React.FC = () => {
 
   const submitEditedFlashcard = async () => {
     const updateMongoCard = {
-      ...mongoCard, flashcards: flashcards
+      ...mongoCard, flashcards: flashcards, title: editTitle
     }
     try {
       const res = await privateApi.put(`/notes/${id}`, updateMongoCard);
@@ -128,10 +134,20 @@ export const FlashcardEdit: React.FC = () => {
             </div>
           </>
         )}
-        <button className='btn' onClick={submitEditedFlashcard}>수정완료</button>
+        <div className={s.btnContainer}>
+          <Button children={'취소'} to={'/'} />
+          <button className='btn' onClick={submitEditedFlashcard}>수정완료</button>
+        </div>
       </div>
-      <div className={s.addCard}>
-        123
+      <div className={s.addCardContainer}>
+        <input type="text" placeholder='제목' value={editTitle} onChange={(e) => setEditTitle(e.target.value)} />
+        <div className={s.addCard}>
+          <label>단어추가</label>
+          <input type="text" placeholder="단어" value={addWord} onChange={(e) => setAddWord(e.target.value)} />
+          <label>뜻</label>
+          <input type="text" placeholder="뜻" value={addMeaning} onChange={(e) => setAddMeaning(e.target.value)} />
+        </div>
+        <div className='btn' onClick={tempSaveWord}>추가</div>
       </div>
     </div>
   )

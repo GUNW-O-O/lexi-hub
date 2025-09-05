@@ -10,7 +10,7 @@ export const NoteList: React.FC = () => {
 
   const [notes, setNotes] = useState([])
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const { user,logout } = useAuth();
 
   const getNoteList = async () => {
     try {
@@ -25,12 +25,8 @@ export const NoteList: React.FC = () => {
     }
   }
   useEffect(() => {
-    if (!user) {
-      setLoading(true);
-      return
-    } else {
+    console.log(user)
       getNoteList();
-    }
   }, [])
 
 
