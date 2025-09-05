@@ -96,6 +96,23 @@ export const FlashcardEdit: React.FC = () => {
       console.error(error);
     }
   }
+  const realDeleteFlashcard = async () => {
+    try {
+      var result = false;
+      if (window.confirm("정말 삭제하시겠습니까?")) {
+        result = true;
+      }
+      if (!result) return;
+      const res = await privateApi.delete(`/notes/${id}`);
+      console.log(res);
+      if (res.status === 204) {
+        alert('삭제완료');
+        navigate('/');
+      }
+    } catch (error) {
+      
+    }
+  }
 
   if (loading) {
     return <div>로딩중...</div>
@@ -137,6 +154,7 @@ export const FlashcardEdit: React.FC = () => {
         <div className={s.btnContainer}>
           <Button children={'취소'} to={'/'} />
           <button className='btn' onClick={submitEditedFlashcard}>수정완료</button>
+          <button className='btn' onClick={realDeleteFlashcard}>삭제</button>
         </div>
       </div>
       <div className={s.addCardContainer}>
