@@ -33,10 +33,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp }) => {
     try {
       // 1. 로그인 요청
       const res = await publicApi.post('/auth/login', { id, password });
-      const { access_token } = res.data;
+      const { accessToken } = res.data;
 
       // 2. Context API를 통해 인증 상태 전역 업데이트
-      login(access_token);
+      login(accessToken);
       console.log('로그인 성공',user)
       // TODO: 로그인 성공 후 페이지 이동 로직 추가 (예: 홈 페이지)
       navigate('/');

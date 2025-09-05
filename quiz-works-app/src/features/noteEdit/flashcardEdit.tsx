@@ -17,6 +17,8 @@ export const FlashcardEdit: React.FC = () => {
   const [editNo, setEditNo] = useState<number>(-1);
   const [editWord, setEditWord] = useState('');
   const [editMeaning, setEditMeaning] = useState('');
+  const [addWord, setAddWord] = useState('');
+  const [addMeaning, setAddMeaning] = useState('');
 
 
   useEffect(() => {
@@ -49,6 +51,10 @@ export const FlashcardEdit: React.FC = () => {
       setEditWord(flashcards[index].word);
       setEditMeaning(flashcards[index].meaning);
     }
+  }
+
+  const tempSaveWord = () => {
+
   }
 
   const tempDeleteWord = (index: number) => {
