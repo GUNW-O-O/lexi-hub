@@ -1,40 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Button } from 'shared/ui/button/button'
-import { privateApi } from 'shared/api/api';
 import { MongoFlashcard } from 'entities/flashcard/note';
-import { useParams } from 'react-router-dom';
 import s from './flashcardInfo.module.css'
 import Unimplemented from 'shared/lib/skeleton/Unimplemented';
+import React from 'react';
+import { Button } from 'shared/ui/button/button';
 
-export const FlashCardInfo: React.FC = () => {
+interface FlashcardInfoProps {
+  note: MongoFlashcard;
+}
 
-  const { id } = useParams<{ id: string }>();
-  const [note, setNote] = useState<MongoFlashcard | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (!id) {
-      setLoading(false);
-      return;
-    }
-    const getNoteById = async () => {
-      try {
-        setLoading(true);
-        const res = await privateApi.get(`/notes/typing/${id}`);
-        setNote(res.data)
-      } catch (error) {
-        alert('초기 로딩 실패');
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getNoteById();
-  }, [id]);
-
-  if (loading) {
-    <div>로딩중임다</div>
-  }
+export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({note}) => {
 
   return (
     <div className={s.cardInfo}>
@@ -48,7 +22,7 @@ export const FlashCardInfo: React.FC = () => {
             <p>브랜치</p>
             <p>머</p>
             <p>다른</p>
-            <p>기능</p>
+            <Button children={'수정'} to={`/notes/edit/${note?._id}`} />
             <Button children={'타이핑하기'} to={`/notes/typing/${note?._id}`} />
           </div>
           <div className={s.wordInfo}>

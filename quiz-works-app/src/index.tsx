@@ -7,6 +7,7 @@ import { AuthPage } from 'pages/login';
 import { NoteNewPage } from 'pages/noteNewPage';
 import { NoteTyping } from 'pages/noteTyping';
 import { NoteInfo } from 'pages/noteInfo';
+import { NoteEdit } from 'pages/noteEdit';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: 'notes/typing/:id',
         element: <NoteTyping />
+      },
+      {
+        path: 'notes/edit/:id',
+        element: <NoteEdit />
       },
     ],
   },
