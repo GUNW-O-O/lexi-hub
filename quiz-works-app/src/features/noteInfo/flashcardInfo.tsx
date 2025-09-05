@@ -3,25 +3,45 @@ import s from './flashcardInfo.module.css'
 import Unimplemented from 'shared/lib/skeleton/Unimplemented';
 import React from 'react';
 import { Button } from 'shared/ui/button/button';
+import { privateApi } from 'shared/api/api';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface FlashcardInfoProps {
   note: MongoFlashcard;
 }
 
-export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({note}) => {
+export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({ note }) => {
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const realDeleteFlashcard = async () => {
+    try {
+      var result = false;
+      if (window.confirm("정말 삭제하시겠습니까?")) {
+        result = true;
+      }
+      if (!result) return;
+      const res = await privateApi.delete(`/notes/${id}`);
+      console.log(res);
+      if (res.status === 204) {
+        alert('삭제완료');
+        navigate('/');
+      }
+    } catch (error) {
+
+    }
+  }
 
   return (
     <div className={s.cardInfo}>
-      <div className={s.infoHeader}>이런저런 설정 추가</div>
       <div className={s.infoTitle}>
         <p className='subtitle'>📃 {note?.title}</p>
       </div>
       <div className={s.container}>
         <div className={s.leftContainer}>
           <div className={s.header}>
-            <p>브랜치</p>
-            <p>머</p>
-            <p>다른</p>
+            <button className='btn' onClick={realDeleteFlashcard}>삭제</button>
             <Button children={'수정'} to={`/notes/edit/${note?._id}`} />
             <Button children={'타이핑하기'} to={`/notes/typing/${note?._id}`} />
           </div>
@@ -37,10 +57,7 @@ export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({note}) => {
               </div>
             )}
           </div>
-          <Unimplemented title='미구현 기능'/>
-        </div>
-        <div className={s.rightContainer}>
-          <Unimplemented title='미구현 기능'/>
+          <Unimplemented title='미구현 기능' />
         </div>
       </div>
     </div>

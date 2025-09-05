@@ -96,7 +96,7 @@ export const NoteNewPage = () => {
           // <LongformForm />
         )}
       </div>
-      {noteType === 'flashcard' && (
+      {noteType === 'flashcard' && flashcards.length > 0 && (
         <>
           <div className={s.wordList}>
             <div className={s.wordHeader}>

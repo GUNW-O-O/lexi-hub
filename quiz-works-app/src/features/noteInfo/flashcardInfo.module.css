@@ -39,7 +39,8 @@
 }
 .left-container .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
+  gap: 10px;
 }
 .left-container .word-info {
   border: 1px solid var(--sub-color);
