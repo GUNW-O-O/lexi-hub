@@ -1,6 +1,6 @@
 // src/pages/NoteNewPage.tsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'shared/lib/context/authProvider';
 import s from './noteNewPage.module.css';
@@ -19,10 +19,14 @@ export const NoteNewPage = () => {
   const [flashcards, setFlashcards] = useState<FlashcardItem[]>([])
 
   // 로그인 상태 확인
-  if (!user) {
-    navigate('/login');
-    return null;
-  }
+
+  // useEffect(() => {
+  //   if (!user) {
+  //     alert('로그인이 필요합니다.');
+  //     navigate('/login');
+  //   }
+  // }, [])
+
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNoteType(e.target.value as 'flashcard' | 'longform');
@@ -40,7 +44,7 @@ export const NoteNewPage = () => {
 
   const completeFlashcard = async () => {
     const data = {
-      title : noteName,
+      title: noteName,
       type: 'flashcard',
       flashcards: flashcards,
     };
@@ -59,7 +63,9 @@ export const NoteNewPage = () => {
   return (
     <div className={s.noteNewPage}>
       <div className={s.newNote}>
-      <Button children={'취소'} to={'/'} />
+        <div className={s.btnContainer}>
+          <Button children={'취소'} to={'/'} />
+        </div>
         <input type="text" value={noteName} onChange={(e) => setNoteName(e.target.value)} placeholder="제목을 입력하세요" />
         <div className={s.typeSelector}>
           <label htmlFor='flashcard-type' className={`btn ${s.typeLabel} ${noteType === 'flashcard' ? s.active : ''}`}>
@@ -111,13 +117,17 @@ export const NoteNewPage = () => {
               return (
                 <>
                   <div key={idx} className={s.wordItem}>
-                    <div className={s.word}>
-                      <p>{card.word}</p>
+                    <div className={s.words}>
+                      <div className={s.word}>
+                        <p>{card.word}</p>
+                      </div>
+                      <div className={s.meaning}>
+                        <p>{card.meaning}</p>
+                      </div>
                     </div>
-                    <div className={s.meaning}>
-                      <p>{card.meaning}</p>
+                    <div className={s.btnContainer}>
+                      <button className='btn' onClick={() => deleteFlashcard(idx)}>삭제</button>
                     </div>
-                    <button className='btn' onClick={() => deleteFlashcard(idx)}>삭제</button>
                   </div>
                 </>
               )

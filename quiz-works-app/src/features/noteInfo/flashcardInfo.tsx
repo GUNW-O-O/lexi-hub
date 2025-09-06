@@ -16,6 +16,10 @@ export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({ note }) => {
   const navigate = useNavigate();
 
   const realDeleteFlashcard = async () => {
+    if (!id) {
+      alert('잘못된 접근입니다.')
+      navigate('/');
+    }
     try {
       var result = false;
       if (window.confirm("정말 삭제하시겠습니까?")) {

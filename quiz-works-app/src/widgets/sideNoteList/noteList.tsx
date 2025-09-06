@@ -13,6 +13,7 @@ export const NoteList: React.FC = () => {
   const { user } = useAuth();
 
   const getNoteList = async () => {
+    if (!user) return;
     try {
       setLoading(true);
       const res = await privateApi.get('/notes');
@@ -26,7 +27,7 @@ export const NoteList: React.FC = () => {
   }
   useEffect(() => {
     console.log(user)
-      getNoteList();
+    getNoteList();
   }, [])
 
 
