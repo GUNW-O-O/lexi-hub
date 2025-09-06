@@ -1,18 +1,17 @@
 import { MongoFlashcard } from 'entities/flashcard/note';
 import s from './flashcardInfo.module.css'
-import Unimplemented from 'shared/lib/skeleton/Unimplemented';
 import React from 'react';
 import { Button } from 'shared/ui/button/button';
 import { privateApi } from 'shared/api/api';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface FlashcardInfoProps {
   note: MongoFlashcard;
+  id: string;
 }
 
-export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({ note }) => {
+export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({ note, id }) => {
 
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const realDeleteFlashcard = async () => {
@@ -61,7 +60,6 @@ export const FlashCardInfo: React.FC<FlashcardInfoProps> = ({ note }) => {
               </div>
             )}
           </div>
-          <Unimplemented title='미구현 기능' />
         </div>
       </div>
     </div>

@@ -9,7 +9,9 @@
 .new-note {
   padding: 20px 20px;
   display: flex;
-  max-width: 380px;
+  min-width: 340px;
+  width: 600px;
+  max-width: 700px;
   gap: 20px;
   flex-direction: column;
   border: 1px solid var(--sub-color);

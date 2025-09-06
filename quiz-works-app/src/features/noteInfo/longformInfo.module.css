@@ -1,0 +1,48 @@
+.longform-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.info-header {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+}
+.info-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  /* background-color: var(--accent-color); */
+  border-bottom: 1px solid var(--sub-color);
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+.header {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+}
+.container textarea {
+  font-size: 15px;
+  font-family: 'Noto Sans KR', 'Google Sans Code', monospace;
+  display: flex;
+  width: 100%;
+  resize: none;
+  background-color: transparent;
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  color: var(--main-color);
+  padding: 3px 5px;
+  height: 500px;
+}

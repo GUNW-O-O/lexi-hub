@@ -28,7 +28,6 @@ export const NoteList: React.FC = () => {
     }
   }
   useEffect(() => {
-    console.log(user)
     getNoteList();
   }, [userLoading, location])
 

@@ -15,4 +15,5 @@ export interface MongoFlashcard {
   flashcards:MongoWord[],
   title: string,
   _id : string
+  content : string;
 }

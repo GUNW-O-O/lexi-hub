@@ -1,5 +1,6 @@
 import { MongoFlashcard } from 'entities/flashcard/note';
 import { FlashCardInfo } from 'features/noteInfo/flashcardInfo'
+import { LongformInfo } from 'features/noteInfo/longformInfo';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { privateApi } from 'shared/api/api';
@@ -36,7 +37,11 @@ export const NoteInfo: React.FC = () => {
 
   return (
     <>
-      <FlashCardInfo note={note} />
+      {note.type === 'flashcard' ? (
+        <FlashCardInfo note={note} id={id!} />
+      ) : (
+        <LongformInfo note={note} id={id!} />
+      )}
     </>
   )
 }

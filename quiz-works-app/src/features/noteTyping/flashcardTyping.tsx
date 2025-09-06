@@ -92,38 +92,41 @@ export const FlashcardTyping: React.FC<TypingProps> = ({ flashcard }) => {
   const chars = currentCard.meaning.split('');
 
   return (
-    <div className={s.typing} onClick={handleContainerClick} ref={containerRef}>
-      <h2>{currentCard.word}</h2>
-      <p className={s.typingText} ref={textRef}>
-        {chars.map((char, index) => {
-          const isTyped = inputValue.length > index;
-          const isCorrect = isTyped && inputValue[index].toLowerCase() === char.toLowerCase();
+    <div className={s.container}>
+      <button className='btn' onClick={() => navigate(-1)}>뒤로가기</button>
+      <div className={s.typing} onClick={handleContainerClick} ref={containerRef}>
+        <h2>{currentCard.word}</h2>
+        <p className={s.typingText} ref={textRef}>
+          {chars.map((char, index) => {
+            const isTyped = inputValue.length > index;
+            const isCorrect = isTyped && inputValue[index].toLowerCase() === char.toLowerCase();
 
-          let color = '#777';
-          if (isTyped) {
-            color = isCorrect ? 'white' : 'red';
-          }
+            let color = '#777';
+            if (isTyped) {
+              color = isCorrect ? 'white' : 'red';
+            }
 
-          const content = char === ' ' ? '\u00A0' : char;
+            const content = char === ' ' ? '\u00A0' : char;
 
-          return (
-            <span key={index} style={{ color }}>
-              {isTyped ? inputValue[index] : content}
-            </span>
-          );
-        })}
-        <span className={s.cursor}></span>
-      </p>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-        ref={inputRef}
-        className={s.typingInput}
-        autoFocus
-        style={{ opacity: 0, position: 'absolute' }}
-      />
+            return (
+              <span key={index} style={{ color }}>
+                {isTyped ? inputValue[index] : content}
+              </span>
+            );
+          })}
+          <span className={s.cursor}></span>
+        </p>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          ref={inputRef}
+          className={s.typingInput}
+          autoFocus
+          style={{ opacity: 0, position: 'absolute' }}
+        />
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { FlashcardForm } from 'features/noteCreate/flashcardForm';
 import { FlashcardItem } from 'entities/flashcard/note';
 import { privateApi } from 'shared/api/api';
 import { Button } from 'shared/ui/button/button';
+import { LongformForm } from 'features/noteCreate/longformForm';
 // import { LongformForm } from 'features/note/longform-form'; // 아직 만들지 않은 컴포넌트
 
 
@@ -15,10 +16,8 @@ export const NoteNewPage = () => {
   const { user, userLoading } = useAuth();
   const navigate = useNavigate();
   const [noteType, setNoteType] = useState<'flashcard' | 'longform'>('flashcard');
-  const [noteName, setNoteName] = useState<string>('')
-  const [flashcards, setFlashcards] = useState<FlashcardItem[]>([])
-
-  // 로그인 상태 확인
+  const [noteName, setNoteName] = useState<string>('');
+  const [flashcards, setFlashcards] = useState<FlashcardItem[]>([]);
 
   useEffect(() => {
     if (!user && !userLoading) {
@@ -59,7 +58,21 @@ export const NoteNewPage = () => {
     }
   }
 
-
+  const submitLongform = async (content:string) => {
+    const data = {
+      title: noteName,
+      type: 'longform',
+      content: content,
+    };
+    try {
+      const res = await privateApi.post('/notes', data);
+      alert('저장 성공')
+      console.log(res)
+      navigate(`/notes/info/${res.data._id}`)
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div className={s.noteNewPage}>
       <div className={s.newNote}>
@@ -97,9 +110,7 @@ export const NoteNewPage = () => {
         {noteType === 'flashcard' ? (
           <FlashcardForm addFlashcard={addFlashcard} completeFlashcard={completeFlashcard} />
         ) : (
-          <>
-          </>
-          // <LongformForm />
+          <LongformForm submitLongform={submitLongform} />
         )}
       </div>
       {noteType === 'flashcard' && flashcards.length > 0 && (
