@@ -5,27 +5,31 @@ import {setCookie, getCookie, deleteCookie} from 'shared/lib/cookie/cookieUtil'
 
 // JWT 페이로드 타입을 정의합니다.
 interface JwtPayload {
-  sub: string;
+  sub : string;
+  id: string;
   nickname: string; // 닉네임 필드를 추가합니다.
 }
 interface AuthContextType {
   user: { id: string; nickname: string } | null;
   login: (token: string) => void;
   logout: () => void;
+  userLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<{ id: string; nickname: string } | null>(null);
+  const [userLoading, setUserLoading] = useState(true);
+
 
   const login = (token: string) => {
     // 토큰을 로컬 스토리지에 저장 (나중에 복구 가능)
     // localStorage.setItem('accessToken', token);
-    setCookie('accessToken', token, 30);
+    setCookie('accessToken', token, 60);
 
     const decodedToken = jwtDecode<JwtPayload>(token);
-    const userId = decodedToken.sub;
+    const userId = decodedToken.id;
     const userNickname = decodedToken.nickname;
 
     const decodedUser = { id: userId, nickname: userNickname };
@@ -35,7 +39,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const logout = () => {
     // localStorage.removeItem('accessToken');
     deleteCookie('accessToken');
-    deleteCookie('refreshToken');
     setUser(null);
   };
 
@@ -48,7 +51,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
         try {
           const decodedToken = jwtDecode<JwtPayload>(token);
           const userNickname = decodedToken.nickname;
-          setUser({ id: decodedToken.sub, nickname: userNickname });
+          setUser({ id: decodedToken.id, nickname: userNickname });
         } catch (error) {
           console.error('토큰 유효성 검사 실패:', error);
           logout();
@@ -56,10 +59,11 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       };
       verifyToken();
     }
+    setUserLoading(false);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, userLoading }}>
       {children}
     </AuthContext.Provider>
   );

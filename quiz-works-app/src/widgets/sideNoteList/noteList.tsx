@@ -4,13 +4,15 @@ import { useAuth } from 'shared/lib/context/authProvider'
 import { Button } from 'shared/ui/button/button';
 import { privateApi } from 'shared/api/api';
 import { MongoFlashcard } from 'entities/flashcard/note';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const NoteList: React.FC = () => {
 
+  const location = useLocation();
+
+  const { user, userLoading } = useAuth();
   const [notes, setNotes] = useState([])
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
 
   const getNoteList = async () => {
     if (!user) return;
@@ -28,7 +30,7 @@ export const NoteList: React.FC = () => {
   useEffect(() => {
     console.log(user)
     getNoteList();
-  }, [])
+  }, [userLoading, location])
 
 
   if (loading) {

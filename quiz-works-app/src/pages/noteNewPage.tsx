@@ -12,7 +12,7 @@ import { Button } from 'shared/ui/button/button';
 
 
 export const NoteNewPage = () => {
-  const { user } = useAuth();
+  const { user, userLoading } = useAuth();
   const navigate = useNavigate();
   const [noteType, setNoteType] = useState<'flashcard' | 'longform'>('flashcard');
   const [noteName, setNoteName] = useState<string>('')
@@ -20,12 +20,12 @@ export const NoteNewPage = () => {
 
   // 로그인 상태 확인
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     alert('로그인이 필요합니다.');
-  //     navigate('/login');
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!user && !userLoading) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    }
+  }, [userLoading])
 
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
