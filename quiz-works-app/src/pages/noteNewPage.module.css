@@ -9,14 +9,14 @@
 .new-note {
   padding: 20px 20px;
   display: flex;
-  min-width: 340px;
-  width: 600px;
-  max-width: 700px;
+  min-width: 300px;
+  max-width: 600px;
   gap: 20px;
   flex-direction: column;
   border: 1px solid var(--sub-color);
   border-radius: 10px;
   background-color: var(--card-color);
+  max-height: 550px;
 }
 .btn-container,
 .btn-container a {

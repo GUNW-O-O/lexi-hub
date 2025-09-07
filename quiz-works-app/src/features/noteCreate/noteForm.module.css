@@ -22,3 +22,22 @@
   width: 100%;
   justify-content: space-between;
 }
+.bulk-add-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 100%;
+  justify-content: start;
+  align-items: start;
+}
+.bulk-add-section textarea {
+  display: flex;
+  width: 100%;
+  resize: none;
+  background-color: transparent;
+  border: 1px solid var(--sub-color);
+  border-radius: 5px;
+  color: var(--main-color);
+  padding: 3px 5px;
+  height: 100%;
+}

@@ -35,7 +35,7 @@
   max-width: 800px;
   padding: 10px;
   gap: 10px;
-  height: 100vh;
+  height: 100%;
 }
 .left-container .header {
   display: flex;

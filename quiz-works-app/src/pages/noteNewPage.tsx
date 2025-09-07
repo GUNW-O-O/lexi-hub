@@ -35,6 +35,10 @@ export const NoteNewPage = () => {
     setFlashcards([...flashcards, word]);
   };
 
+  const addBulkFlashcard = (words: FlashcardItem[]) => {
+    setFlashcards([...flashcards, ...words]);
+  }
+
   const deleteFlashcard = (idx: number) => {
     // 인덱스가 idx와 같지 않은 요소들만 남겨서 새로운 배열을 만듭니다.
     const newFlashcards = flashcards.filter((_, index) => index !== idx);
@@ -106,9 +110,9 @@ export const NoteNewPage = () => {
         </div>
 
 
-        {/* 선택된 타입에 따라 다른 폼 컴포넌트 렌더링 */}
         {noteType === 'flashcard' ? (
-          <FlashcardForm addFlashcard={addFlashcard} completeFlashcard={completeFlashcard} />
+          <FlashcardForm addFlashcard={addFlashcard}
+          completeFlashcard={completeFlashcard} addBulkFlashcard={addBulkFlashcard} />
         ) : (
           <LongformForm submitLongform={submitLongform} />
         )}

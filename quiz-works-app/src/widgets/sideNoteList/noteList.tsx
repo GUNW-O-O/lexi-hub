@@ -6,13 +6,23 @@ import { privateApi } from 'shared/api/api';
 import { MongoFlashcard } from 'entities/flashcard/note';
 import { Link, useLocation } from 'react-router-dom';
 
-export const NoteList: React.FC = () => {
+type NoteListProps = {
+  parentRef: React.RefObject<HTMLDivElement | null>;
+};
+
+export const NoteList: React.FC<NoteListProps> = ({ parentRef }) => {
 
   const location = useLocation();
-
+  const [height, setHeight] = useState(0);
   const { user, userLoading } = useAuth();
   const [notes, setNotes] = useState([])
   const [loading, setLoading] = useState(true);
+
+  const updateHeight = () => {
+    if (parentRef.current) {
+      setHeight(parentRef.current.offsetHeight - 80);
+    }
+  };
 
   const getNoteList = async () => {
     if (!user) return;
@@ -30,18 +40,32 @@ export const NoteList: React.FC = () => {
   useEffect(() => {
     getNoteList();
   }, [userLoading, location])
+  
+  useEffect(() => {
+    if (!parentRef.current) return;
+
+    const observer = new ResizeObserver(() => {
+      if (parentRef.current!.offsetHeight >= 864) {
+        setHeight(parentRef.current!.offsetHeight);
+      }
+    });
+
+    observer.observe(parentRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
 
   if (loading) {
     return (
-      <div className={s.noteList}>
+      <div className={s.noteList} style={{ height: height }}>
         <p>로그인을 해주세요</p>
       </div>
     )
   }
 
   return (
-    <div className={s.noteList}>
+    <div className={s.noteList} style={{ height: height }}>
       {user && (
         <>
           <div className={s.sideUtil}>
