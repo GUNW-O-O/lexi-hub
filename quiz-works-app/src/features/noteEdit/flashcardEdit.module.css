@@ -52,10 +52,11 @@
   gap: 5px;
 }
 .edit-form .word-input{
-  width: 100px;
+  width: 80px;
 }
 .edit-form .meaning-input {
-  width: 300px;
+  /* display: flex; */
+  width: 100%;
 }
 .edit-form input {
   font-size: 16px;
@@ -77,6 +78,7 @@
   border: 1px solid var(--sub-color);
   min-width: 200px;
   width: 300px;
+  max-height: 250px;
   align-items: start;
   justify-content: center;
 }
