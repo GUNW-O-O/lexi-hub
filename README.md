@@ -1,4 +1,4 @@
-# quiz-works
+# lexi-hub
 
 ## NestJS
 - npm run start:dev
