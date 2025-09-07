@@ -37,10 +37,11 @@ export const NoteTyping: React.FC = () => {
 
   return (
     <>
-      {/* {flashcard && (
+      {flashcard ? (
         <FlashcardTyping flashcard={flashcard} />
-      )} */}
-      <LongformTyping note={note} />
+      ) : (
+        <LongformTyping note={note} />
+      )}
     </>
   )
 }

@@ -8,7 +8,6 @@ interface TypingProps {
 }
 
 export const FlashcardTyping: React.FC<TypingProps> = ({ flashcard }) => {
-
   const [cards, setCards] = useState<FlashcardItem[]>(flashcard?.flashcards);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [inputValue, setInputValue] = useState('');
@@ -23,9 +22,7 @@ export const FlashcardTyping: React.FC<TypingProps> = ({ flashcard }) => {
   useEffect(() => {
     const shuffledCards = flashcard.flashcards.sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
-
-  }, [flashcard?._id])
-
+  }, [flashcard?._id]);
 
   useEffect(() => {
     setInputValue('');
@@ -34,14 +31,12 @@ export const FlashcardTyping: React.FC<TypingProps> = ({ flashcard }) => {
     }
   }, [currentIndex]);
 
-  // **커서 위치를 보정하는 useEffect 훅**
   useEffect(() => {
     if (textRef.current && currentCard) {
       const pElement = textRef.current;
       const spans = Array.from(pElement.children) as HTMLElement[];
       let cursorLeft = 0;
 
-      // inputValue.length에 따라 커서 위치 계산
       for (let i = 0; i < inputValue.length; i++) {
         if (spans[i]) {
           cursorLeft += spans[i].offsetWidth;
@@ -84,7 +79,6 @@ export const FlashcardTyping: React.FC<TypingProps> = ({ flashcard }) => {
     setInputValue(value);
   };
 
-
   if (!cards || cards.length === 0) {
     return <div>단어를 찾을 수 없습니다.</div>;
   }
@@ -99,18 +93,37 @@ export const FlashcardTyping: React.FC<TypingProps> = ({ flashcard }) => {
         <p className={s.typingText} ref={textRef}>
           {chars.map((char, index) => {
             const isTyped = inputValue.length > index;
-            const isCorrect = isTyped && inputValue[index].toLowerCase() === char.toLowerCase();
+            const typedChar = inputValue[index];
+            const isCorrect = isTyped && typedChar.toLowerCase() === char.toLowerCase();
+            const isIncorrect = isTyped && typedChar.toLowerCase() !== char.toLowerCase();
 
             let color = '#777';
+            let backgroundColor = 'transparent';
+
             if (isTyped) {
-              color = isCorrect ? 'white' : 'red';
+              if (index === inputValue.length - 1) {
+                // 현재 입력 중인 글자는 오타 판단하지 않음
+                color = '#fff'; 
+              } else if (isCorrect) {
+                color = 'white';
+              } else {
+                color = 'red';
+                backgroundColor = 'rgba(255, 0, 0, 0.2)';
+              }
+            }
+            
+            // 띄어쓰기 오타 처리
+            if (char === ' ') {
+              if (isTyped && typedChar !== ' ') {
+                backgroundColor = 'rgba(255, 0, 0, 0.2)';
+                color = 'red';
+              }
+              return <span key={index} style={{ color, backgroundColor }}>&nbsp;</span>;
             }
 
-            const content = char === ' ' ? '\u00A0' : char;
-
             return (
-              <span key={index} style={{ color }}>
-                {isTyped ? inputValue[index] : content}
+              <span key={index} style={{ color, backgroundColor }}>
+                {isTyped ? typedChar : char}
               </span>
             );
           })}
