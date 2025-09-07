@@ -25,9 +25,10 @@
   justify-content: start;
   align-items: center;
   gap: 5px;
+  width: 100%;
 }
 .card p {
-  width: 100px;
+  width: 80px;
   padding: 3px 0;
   display: flex;
   align-items: center;
@@ -37,9 +38,9 @@
   white-space: nowrap;
 }
 .card span {
-  width: 300px;
   padding: 3px 0;
-  display: flex;
+  flex: 1 1 80px;
+  /* max-width: 150px; */
   align-items: center;
   justify-content: start;
   text-overflow: ellipsis;
@@ -74,7 +75,8 @@
   border-radius: 10px;
   padding: 10px;
   border: 1px solid var(--sub-color);
-  min-width: 300px;
+  min-width: 200px;
+  width: 300px;
   align-items: start;
   justify-content: center;
 }
