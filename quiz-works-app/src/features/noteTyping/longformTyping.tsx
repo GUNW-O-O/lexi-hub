@@ -167,7 +167,7 @@ export const LongformTyping: React.FC<TypingProps> = ({ note }) => {
   };
 
   if (!note?.content) {
-    return <div>내용을 찾을 수 없습니다.</div>;
+    return <div className='loading-div'>내용을 찾을 수 없습니다.</div>;
   }
 
   return (

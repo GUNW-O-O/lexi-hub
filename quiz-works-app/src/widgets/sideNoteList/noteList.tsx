@@ -18,18 +18,12 @@ export const NoteList: React.FC<NoteListProps> = ({ parentRef }) => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(''); // **새로운 검색어 상태**
 
-  const updateHeight = () => {
-    if (parentRef.current) {
-      setHeight(parentRef.current.offsetHeight - 80);
-    }
-  };
 
   const getNoteList = async () => {
     if (!user) return;
     try {
       setLoading(true);
       const res = await privateApi.get('/notes');
-      console.log(res);
       setNotes(res.data);
     } catch (error) {
       alert('유저 단어장 목록 조회실패');
@@ -91,15 +85,22 @@ export const NoteList: React.FC<NoteListProps> = ({ parentRef }) => {
             />
           </div>
           <div className={s.notes}>
-            {filteredNotes.map((note: MongoFlashcard) => (
-              <Link to={`/notes/info/${note._id}`} key={note._id}>
-                <p>
-                  {(note.type === 'flashcard' ? '📃' : '📗')}{note.author} / {note.title}
-                </p>
-              </Link>
-            ))}
-            {filteredNotes.length === 0 && searchQuery !== '' && (
-              <p>검색 결과가 없습니다.</p>
+            {notes.length > 0 ? (
+              <>
+                {filteredNotes.map((note: MongoFlashcard) => (
+                  <Link to={`/notes/info/${note._id}`} key={note._id}>
+                    <p>
+                      {(note.type === 'flashcard' ? '📃' : '📗')}{note.author} / {note.title}
+                    </p>
+                  </Link>
+                ))}
+                {filteredNotes.length === 0 && searchQuery !== '' && (
+                  <p>검색 결과가 없습니다.</p>
+                )}
+              </>
+
+            ) : (
+              <p>단어장이 없습니다.</p>
             )}
           </div>
         </>

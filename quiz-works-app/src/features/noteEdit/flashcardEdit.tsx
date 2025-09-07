@@ -115,7 +115,7 @@ export const FlashcardEdit: React.FC = () => {
   }
 
   if (loading) {
-    return <div>로딩중...</div>
+    return <div className='loading-div'>로딩중...</div>
   }
 
   return (

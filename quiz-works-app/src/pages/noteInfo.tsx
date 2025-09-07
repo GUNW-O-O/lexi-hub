@@ -32,7 +32,7 @@ export const NoteInfo: React.FC = () => {
   }, [id]);
 
   if (loading) {
-    return <div>로딩중임다</div>
+    return <div className='loading-div'>로딩중임다</div>
   }
 
   return (

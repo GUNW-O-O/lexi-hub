@@ -9,7 +9,6 @@ import { FlashcardItem } from 'entities/flashcard/note';
 import { privateApi } from 'shared/api/api';
 import { Button } from 'shared/ui/button/button';
 import { LongformForm } from 'features/noteCreate/longformForm';
-// import { LongformForm } from 'features/note/longform-form'; // 아직 만들지 않은 컴포넌트
 
 
 export const NoteNewPage = () => {
