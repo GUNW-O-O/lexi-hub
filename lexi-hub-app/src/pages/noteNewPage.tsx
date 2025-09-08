@@ -30,13 +30,14 @@ export const NoteNewPage = () => {
     setNoteType(e.target.value as 'flashcard' | 'longform');
   };
 
-  const addFlashcard = (word: FlashcardItem) => {
-    setFlashcards([...flashcards, word]);
+  const addFlashcard = (word: FlashcardItem | FlashcardItem[]) => {
+    if (Array.isArray(word)) {
+      setFlashcards([...flashcards, ...word]);
+      return;
+    } else {
+      setFlashcards([...flashcards, word]);
+    }
   };
-
-  const addBulkFlashcard = (words: FlashcardItem[]) => {
-    setFlashcards([...flashcards, ...words]);
-  }
 
   const deleteFlashcard = (idx: number) => {
     // 인덱스가 idx와 같지 않은 요소들만 남겨서 새로운 배열을 만듭니다.
@@ -111,7 +112,7 @@ export const NoteNewPage = () => {
 
         {noteType === 'flashcard' ? (
           <FlashcardForm addFlashcard={addFlashcard}
-          completeFlashcard={completeFlashcard} addBulkFlashcard={addBulkFlashcard} />
+          completeFlashcard={completeFlashcard} />
         ) : (
           <LongformForm submitLongform={submitLongform} />
         )}
