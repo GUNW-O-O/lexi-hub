@@ -3,13 +3,12 @@ import s from './noteForm.module.css'
 import { FlashcardItem } from 'entities/flashcard/note'
 
 interface FlashcardFormProps {
-  addFlashcard: (word: FlashcardItem) => void
+  addFlashcard: (word: FlashcardItem | FlashcardItem[]) => void
   completeFlashcard: () => void
-  addBulkFlashcard: (words: FlashcardItem[]) => void
 }
 
 
-export const FlashcardForm: React.FC<FlashcardFormProps> = ({ addFlashcard, completeFlashcard, addBulkFlashcard }) => {
+export const FlashcardForm: React.FC<FlashcardFormProps> = ({ addFlashcard, completeFlashcard }) => {
 
   const [meaning, setMeaning] = useState('');
   const [noteWord, setNoteWord] = useState('');
@@ -39,7 +38,7 @@ export const FlashcardForm: React.FC<FlashcardFormProps> = ({ addFlashcard, comp
     try {
       const parsedData = JSON.parse(bulkInput);
       if (Array.isArray(parsedData)) {
-        addBulkFlashcard(parsedData);
+        addFlashcard(parsedData);
         alert(`${parsedData.length}개의 플래시카드를 추가했습니다.`);
         setBulkInput('');
         return;
@@ -62,7 +61,7 @@ export const FlashcardForm: React.FC<FlashcardFormProps> = ({ addFlashcard, comp
     });
     
     if (addedCount > 0) {
-      addBulkFlashcard(arr);
+      addFlashcard(arr);
       alert(`${addedCount}개의 플래시카드를 추가했습니다.`);
       setBulkInput('');
     } else {
