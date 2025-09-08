@@ -14,6 +14,7 @@ export const LongformInfo: React.FC<LongformInfoProps> = ({ note, id }) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState<string>(note.content);
+  const [editContent, setEditContent] = useState<string>('');
 
   const navigate = useNavigate();
 
@@ -46,11 +47,15 @@ export const LongformInfo: React.FC<LongformInfoProps> = ({ note, id }) => {
     }
     if (!result) return;
     const data = {
-      ...note, content: content
+      ...note, content: editContent
     }
     try {
       const res = await privateApi.put(`/notes/${id}`, data)
       console.log(res)
+      if (res.status === 200 || res.status === 201) {
+        setContent(res.data.content);
+        alert('수정완료');
+      }
     } catch (error) {
       console.error(error)
     }
@@ -58,7 +63,12 @@ export const LongformInfo: React.FC<LongformInfoProps> = ({ note, id }) => {
   }
 
   const handleEdit = () => {
-    setIsEditing(prev => !prev);
+    if(isEditing) {
+      setIsEditing(prev => !prev);
+    } else {
+      setEditContent(content)
+      setIsEditing(prev => !prev);
+    }
   };
 
   return (
@@ -80,9 +90,9 @@ export const LongformInfo: React.FC<LongformInfoProps> = ({ note, id }) => {
           <Button children={'타이핑하기'} to={`/notes/typing/${note?._id}`} />
         </div>
         <div className={s.contentInfo}>
-          <textarea value={content}
+          <textarea value={isEditing ? editContent : content}
             readOnly={!isEditing}
-            onChange={(e) => setContent(e.target.value)}></textarea>
+            onChange={(e) => setEditContent(e.target.value)}></textarea>
         </div>
       </div>
     </div>
