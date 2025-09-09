@@ -1,19 +1,19 @@
-# LexiHub
+# ⌨ LexiHub
 
-커스텀 단어장 학습용 Toy 프로젝트입니다. React(FSD 구조)와 TypeScript를 기반으로 프론트엔드를 구현하고, NestJS와 MongoDB를 활용해 백엔드를 구성했습니다. JWT 기반 인증/인가 흐름도 직접 구현하였습니다.
+커스텀 단어장 학습용 Toy 프로젝트입니다. React(FSD 구조)와 TypeScript를 기반으로 프론트엔드를 구현하고, NestJS와 MongoDB를 활용해 백엔드를 구성했습니다. JWT 기반 인증/인가 흐름도 학습해보려 구현하였습니다.
 
 ---
 
-## 기술 스택
+## 🛠 기술 선정 이유
 
-- **React (FSD 구조) + TypeScript**: 정적 타입 검증과 유지보수성 향상, 기능 단위별 관심사 분리  
+- **React (FSD 구조) + TypeScript**: 정적 타입 검증과 유지보수성 향상, 기능 단위별 관심사 분리 
 - **NestJS**: TypeScript 지원과 모듈 기반 구조를 활용해 기능별 모듈화 경험  
 - **MongoDB**: NoSQL 구조로 단어 중심 데이터 모델 적용, 빠른 프로토타이핑 가능  
 - **JWT**: Access Token + HttpOnly Refresh Token을 통한 인증/인가 흐름 구현
 
 ---
 
-## 프로젝트 화면
+## 🎥 구현 화면
 
 | 화면 | 설명 |
 |------|------|
@@ -29,21 +29,21 @@
 
 ---
 
-## 프로젝트 경험
+## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Activities/Party%20Popper.png" alt="Party Popper" width="25" height="25" /> 프로젝트 경험
 
-### 문제점 (Troubles)
+### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Thinking%20Face.png" alt="Thinking Face" width="25" height="25" /> 문제점 (Troubles)
 - JWT 만료 시 인증 오류 발생 → 장시간 페이지 체류 시 불필요한 로그인 요청  
 - 한글 입력 시 받침 완성 전 오타로 인식  
 - JSON/CSV 대량 추가 시 마지막 단어만 추가되는 버그
 
-### 해결방안 (Solution)
+### <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Smiling%20Face%20with%20Sunglasses.png" alt="Smiling Face with Sunglasses" width="25" height="25" /> 해결방안 (Solution)
 - Access Token 만료 시 httpOnly Refresh Token을 사용해 자동 갱신  
 - 입력 중인 글자는 오타 검증 제외, 다음 글자 입력 시 이전 글자를 최종 판단  
 - FlashCard[] 구조분해를 통한 리스트/단일 추가 로직 처리
 
 ---
 
-## 느낀 점
-- 제한된 시간 속에서도 TypeScript와 React(FSD 구조)를 활용해 기능 단위 관심사 분리를 학습  
+## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Partying%20Face.png" alt="Partying Face" width="25" height="25" /> 느낀 점
+- TypeScript와 React(FSD 구조)를 학습하며 기능 단위 관심사 분리를 학습  
 - NestJS 모듈 기반 아키텍처와 MongoDB NoSQL 구조를 경험하며, 백엔드와 프론트엔드 연동 이해  
 - 인증/인가 영역을 직접 구현하며 Context와 커스텀 훅 활용 흐름을 학습
