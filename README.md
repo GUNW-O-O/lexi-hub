@@ -43,7 +43,7 @@
 
 ---
 
-## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Partying%20Face.png" alt="Partying Face" width="25" height="25" /> 느낀 점
+## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Partying%20Face.png" alt="Partying Face" width="25" height="25" /> 목표
 - TypeScript와 React(FSD 구조)를 학습하며 기능 단위 관심사 분리를 학습  
 - NestJS 모듈 기반 아키텍처와 MongoDB NoSQL 구조를 경험하며, 백엔드와 프론트엔드 연동 이해  
 - 인증/인가 영역을 직접 구현하며 Context와 커스텀 훅 활용 흐름을 학습
