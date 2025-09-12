@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext, useEffect, PropsWithChildren } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import {setCookie, getCookie, deleteCookie} from 'shared/lib/cookie/cookieUtil'
+import { useNavigate } from 'react-router-dom';
 
 // JWT 페이로드 타입을 정의합니다.
 interface JwtPayload {
@@ -21,6 +22,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<{ id: string; nickname: string } | null>(null);
   const [userLoading, setUserLoading] = useState(true);
+  
+  const navigate = useNavigate();
 
 
   const login = (token: string) => {
@@ -40,6 +43,9 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     // localStorage.removeItem('accessToken');
     deleteCookie('accessToken');
     setUser(null);
+    navigate('/');
+    window.location.reload();
+    alert('로그아웃 되었습니다.');
   };
 
   // 컴포넌트 마운트 시 로컬 스토리지에서 토큰 복구

@@ -11,7 +11,6 @@ export const Header: React.FC = () => {
   return (
     <div className={styles.header}>
       <div className="logo">
-        {/* <Button children='미정이' to='/' /> */}
         <Link to={'/'} style={{display: 'flex', alignItems: 'center'}}>
           <img src="/logo.png" alt="LexiHub" />
           <h2>LexiHub</h2>

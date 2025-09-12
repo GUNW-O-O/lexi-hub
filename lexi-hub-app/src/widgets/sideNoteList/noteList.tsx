@@ -50,7 +50,7 @@ export const NoteList: React.FC<NoteListProps> = ({ parentRef }) => {
     return () => observer.disconnect();
   }, []);
 
-  // **검색 로직 추가**
+  // 검색
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
