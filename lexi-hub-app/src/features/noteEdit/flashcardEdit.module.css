@@ -39,8 +39,8 @@
 }
 .card span {
   padding: 3px 0;
-  flex: 1 1 80px;
-  /* max-width: 150px; */
+  flex: 1 0 80px;
+  max-width: 120px;
   align-items: center;
   justify-content: start;
   text-overflow: ellipsis;
