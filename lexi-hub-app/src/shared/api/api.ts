@@ -6,7 +6,7 @@ export const publicApi = axios.create({
   withCredentials: true
 })
 export const privateApi = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://13.125.210.135:3000/api',
   withCredentials: true
 })
 
