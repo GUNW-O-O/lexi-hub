@@ -95,7 +95,7 @@ export const FlashcardTyping: React.FC<TypingProps> = ({ flashcard }) => {
             const isTyped = inputValue.length > index;
             const typedChar = inputValue[index];
             const isCorrect = isTyped && typedChar.toLowerCase() === char.toLowerCase();
-            const isIncorrect = isTyped && typedChar.toLowerCase() !== char.toLowerCase();
+            // const isIncorrect = isTyped && typedChar.toLowerCase() !== char.toLowerCase();
 
             let color = '#777';
             let backgroundColor = 'transparent';

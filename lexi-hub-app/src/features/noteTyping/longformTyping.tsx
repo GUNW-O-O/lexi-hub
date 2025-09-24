@@ -24,7 +24,7 @@ export const LongformTyping: React.FC<TypingProps> = ({ note }) => {
 
   // Timer Logic
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+    let interval: ReturnType<typeof setInterval> | null = null;
     if (isTyping) {
       interval = setInterval(() => setTimer(prevTime => prevTime + 1), 1000);
     }
