@@ -37,7 +37,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp }) => {
 
       // 2. Context API를 통해 인증 상태 전역 업데이트
       login(accessToken);
-      console.log('로그인 성공',user)
+      console.log('로그인 성공', user)
       // TODO: 로그인 성공 후 페이지 이동 로직 추가 (예: 홈 페이지)
       navigate('/');
 
@@ -55,13 +55,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({ reqSingUp }) => {
           <input type="text" onChange={onChangeId} placeholder='아이디' />
           <input type="password" onChange={onChangePassword} placeholder='비밀번호' />
         </div>
-      <div className={styles.btnGroup}>
-        <button className='btn' type='submit'>로그인</button>
-        <Button to='#'>계정찾기</Button>
-      </div>
+        <div className={styles.btnGroup}>
+          <button className='btn' type='submit'>로그인</button>
+          <Button to='/'>취소</Button>
+        </div>
       </form>
-      <p>계정이 없으신가요?</p>
-      <Button to='#' onClick={reqSingUp}>회원가입</Button>
+      <p>간단하게 가입이 가능합니다!</p>
+      <div className={styles.btnGroup}>
+        <Button to='#' onClick={() => alert("미구현")}>계정찾기</Button>
+        <Button to='#' onClick={reqSingUp}>회원가입</Button>
+      </div>
     </div>
   )
 }

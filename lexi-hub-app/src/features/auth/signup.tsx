@@ -45,13 +45,14 @@ export const SignupForm: React.FC<SingupFormProps> = ({ reqSingUp }) => {
           <input type="text" onChange={onChangeNickname} placeholder='닉네임' />
           <input type="password" onChange={onChangePassword} placeholder='비밀번호' />
         </div>
-      <div className={styles.btnGroup}>
-        <button className='btn' type='submit'>회원가입</button>
-        <Button to='#'>계정찾기</Button>
-      </div>
+        <div className={styles.btnGroup}>
+          <button className='btn' type='submit'>회원가입</button>
+          <Button to='#'>계정찾기</Button>
+          <div>
+            <Button to='#' onClick={reqSingUp}>로그인으로 돌아가기</Button>
+          </div>
+        </div>
       </form>
-      <p>취소</p>
-      <Button to='#' onClick={reqSingUp}>취소</Button>
     </div>
   )
 }
